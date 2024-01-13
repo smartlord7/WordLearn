@@ -1,0 +1,8 @@
+<!-- res/drawable/grid_cell_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF4081" /> <!-- Fill color (pink in this example) -->
+    <corners android:radius="8dp" /> <!-- Rounded corners with a radius of 8dp -->
+    <stroke
+        android:width="2dp"
+        android:color="#FFFFFF" /> <!-- Border color and width -->
+</shape>

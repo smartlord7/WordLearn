@@ -1,0 +1,49 @@
+<!-- res/values/styles.xml -->
+<resources>
+
+    <style name="MainMenuButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@drawable/main_menu_button_background</item>
+        <!-- Add more styling attributes as needed -->
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">#3F51B5</item> <!-- Primary color for the app toolbar -->
+        <item name="colorPrimaryDark">#303F9F</item> <!-- Darker variant for the status bar -->
+        <item name="colorAccent">#FF4081</item> <!-- Accent color used for buttons and highlights -->
+
+        <!-- Customize other theme attributes as needed -->
+    </style>
+
+        <style name="RegistrationEditText" parent="Widget.AppCompat.EditText">
+            <item name="android:background">@drawable/edit_text_background</item>
+            <item name="android:padding">10dp</item>
+            <item name="android:textColor">#FFFFFF</item>
+            <!-- Add more styling attributes as needed -->
+        </style>
+
+
+
+        <style name="TierButtonBronze">
+            <item name="android:background">#CD7F32</item> <!-- Bronze color -->
+        </style>
+
+        <style name="TierButtonSilver">
+            <item name="android:background">#C0C0C0</item> <!-- Silver color -->
+        </style>
+
+        <style name="TierButtonGold">
+            <item name="android:background">#FFD700</item> <!-- Gold color -->
+        </style>
+
+        <style name="TierButtonMaster">
+            <item name="android:background">#800080</item> <!-- Purple color for Master -->
+        </style>
+
+
+
+
+
+
+</resources>

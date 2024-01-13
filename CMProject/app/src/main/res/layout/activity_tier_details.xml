@@ -1,0 +1,21 @@
+<!-- res/layout/activity_tier_details.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#000000">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="5"
+        android:rowCount="5"
+        android:layout_margin="16dp"
+        android:background="@drawable/cell_background">
+
+        <!-- Add your cells here -->
+
+    </GridLayout>
+
+</RelativeLayout>

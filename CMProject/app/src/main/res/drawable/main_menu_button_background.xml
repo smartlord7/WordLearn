@@ -1,0 +1,9 @@
+<!-- res/drawable/main_menu_button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#4CAF50" /> <!-- Change this color as desired -->
+
+    <corners android:radius="8dp" />
+
+</shape>

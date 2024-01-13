@@ -1,0 +1,11 @@
+<!-- res/layout/fragment_challenge.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#212121">
+
+    <!-- Your UI elements for the challenge fragment go here -->
+    <!-- For example, you can add TextViews, Buttons, etc. -->
+
+</RelativeLayout>

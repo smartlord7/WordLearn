@@ -1,0 +1,11 @@
+<!-- res/layout/cell_layout.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:background="@drawable/cell_background">
+
+    <!-- Customize the cell content as needed -->
+
+</RelativeLayout>
