@@ -1,4 +1,5 @@
-package com.example.cmproject;
+package com.example.cmproject.util;
+import com.example.cmproject.WordTranslation;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

@@ -1,4 +1,4 @@
-package com.example.cmproject;
+package com.example.cmproject.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

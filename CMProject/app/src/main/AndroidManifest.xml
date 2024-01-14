@@ -21,6 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"> <!-- Add tools:replace to avoid conflicts -->
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCxNk5Thx6OGaP1AXe4CtnKunfiFjm7DG8"/>
+
 
         <activity
             android:name=".MainMenuActivity"
@@ -30,47 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".RankedActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".ScoreboardActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".ChallengeActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".LoggedInActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".TiersActivity"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
-        <activity
-            android:name=".ZoomableTileGridView"
-            android:exported="false"> <!-- Set exported to false for other activities -->
-        </activity>
-
 
         <!-- Add more activities as needed -->
 

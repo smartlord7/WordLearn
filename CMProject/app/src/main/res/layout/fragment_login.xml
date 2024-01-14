@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Login to WordWorld"
+        android:text="Login to Word Learn"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />

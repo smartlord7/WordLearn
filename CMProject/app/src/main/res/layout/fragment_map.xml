@@ -1,0 +1,33 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.fragment.app.FragmentContainerView xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.example.cmproject.views.CustomGridView
+        android:id="@+id/grid_small"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grid_square_small"
+        android:visibility="visible"/>
+
+    <com.example.cmproject.views.CustomGridView
+        android:id="@+id/grid_medium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grid_square_medium"
+        android:visibility="gone"/>
+
+    <com.example.cmproject.views.CustomGridView
+        android:id="@+id/grid_large"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grid_square_large"
+        android:visibility="gone"/>
+</RelativeLayout>

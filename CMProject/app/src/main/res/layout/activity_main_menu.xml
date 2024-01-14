@@ -3,15 +3,59 @@
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#212121">
+    android:background="#212121"
+    android:padding="16dp">
 
+    <LinearLayout
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <!-- Add your toolbar content here -->
+        <Button
+            android:id="@+id/btnRankedPlay"
+            style="@style/MainMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="onRankedPlayButtonClick"
+            android:text="Ranked Play"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnScoreboard"
+            style="@style/MainMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="onScoreboardButtonClick"
+            android:text="Scoreboard"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnProfile"
+            style="@style/MainMenuButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:onClick="onProfileButtonClick"
+            android:text="Profile"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 
     <!-- Add FrameLayout container for fragments -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/navigationBar" />
 
 </RelativeLayout>

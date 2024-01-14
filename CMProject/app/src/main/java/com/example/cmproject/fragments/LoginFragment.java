@@ -11,7 +11,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.cmproject.LoggedInActivity;
+
+import com.example.cmproject.MainMenuActivity;
+import com.example.cmproject.fragments.HomeFragment;
 import com.example.cmproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,19 +56,17 @@ public class LoginFragment extends Fragment {
         Log.d("LoginFragment", "Username: " + username + ", Password: " + password);
 
         // Check if the entered username and password are correct
-        loginUser(username, password);
+        loginUser(username, password,view);
     }
 
-    private void loginUser(String email, String password) {
+    private void loginUser(String email, String password, View view) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Login successful, navigate to the activity with "Ranked Play" and "Scoreboard" buttons
-                            Intent intent = new Intent(requireContext(), LoggedInActivity.class);
-                            startActivity(intent);
-                            requireActivity().finish(); // Finish the LoginActivity to prevent going back
+                            ((MainMenuActivity) getActivity()).onLoginSuccessful(view);
                         } else {
                             // If login fails, show an error message
                             showToast("Invalid username or password");
