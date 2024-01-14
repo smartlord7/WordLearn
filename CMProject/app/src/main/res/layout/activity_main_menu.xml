@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="onRankedPlayButtonClick"
-            android:text="Ranked Play"
+            android:text="Play"
             android:textColor="#FFFFFF" />
 
         <Button

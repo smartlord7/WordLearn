@@ -27,7 +27,6 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        editTextUsername = view.findViewById(R.id.editTextUsername);
         editTextPassword = view.findViewById(R.id.editTextPassword);
         editTextEmail = view.findViewById(R.id.editTextEmail);
 
@@ -45,12 +44,11 @@ public class RegisterFragment extends Fragment {
     }
 
     private void onCreateAccountButtonClick(View view) {
-        String username = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
         String email = editTextEmail.getText().toString();
 
         // Check if username, password, and email are not empty
-        if (!username.isEmpty() && !password.isEmpty() && !email.isEmpty()) {
+        if (!password.isEmpty() && !email.isEmpty()) {
             // Save registration data to Firebase Authentication
             registerUser(email, password);
             ((MainMenuActivity) getActivity()).onLoginButtonClick(view);

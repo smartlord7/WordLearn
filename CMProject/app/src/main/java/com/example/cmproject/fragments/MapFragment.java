@@ -2,11 +2,8 @@ package com.example.cmproject.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,8 +41,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -247,9 +242,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                                     // Update the UI on the main thread
                                     requireActivity().runOnUiThread(() -> {
                                         // Add marker to the map
-                                        Marker marker = googleMap.addMarker(new MarkerOptions()
+                                        @SuppressLint("DefaultLocale") Marker marker = googleMap.addMarker(new MarkerOptions()
                                                 .position(new LatLng(latitude, longitude))
-                                                .title("Score: " + score));
+                                                .title("Score: " + String.format("%.2f",score)));
 
                                         // Customize the marker appearance as needed
                                         // For example, you can use different icons for different tiers
@@ -378,12 +373,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     private void enterChallenge(double latitude, double longitude) {
-        // Perform actions to handle entering the challenge at the specified coordinates
-        // For example, you can navigate to a new activity or fragment for the challenge
-        // Make sure to pass the latitude and longitude to the next screen if needed
         Toast.makeText(requireContext(), "Entering challenge at " + latitude + ", " + longitude, Toast.LENGTH_SHORT).show();
         // Add your navigation logic here
-
         ((MainMenuActivity) (getActivity())).onEnterChallenge(getView(), tier);
     }
 }

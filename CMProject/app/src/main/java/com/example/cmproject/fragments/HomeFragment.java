@@ -29,13 +29,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
-
-    /*private void onScoreboardButtonClick(View view) {
-        // Handle Scoreboard button click
-        Intent intent = new Intent(requireContext(), ScoreboardActivity.class);
-        startActivity(intent);
-    }*/
 }
 
 

@@ -30,8 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class GoldChallengeFragment extends Fragment {
 
@@ -83,34 +87,40 @@ public class GoldChallengeFragment extends Fragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("gold");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                wordsList.clear();
+        // Use Executors for database operation off the main thread
+        Executor executor = Executors.newSingleThreadExecutor();
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String language1 = snapshot.child("language1").getValue(String.class);
-                    String language2 = snapshot.child("language2").getValue(String.class);
-                    String word1 = snapshot.child("word1").getValue(String.class);
-                    String word2 = snapshot.child("word2").getValue(String.class);
+        executor.execute(() -> {
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    wordsList.clear();
 
-                    WordTranslation word = new WordTranslation(0, language1, word1, language2, word2);
-                    wordsList.add(word);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String language1 = snapshot.child("language1").getValue(String.class);
+                        String language2 = snapshot.child("language2").getValue(String.class);
+                        String word1 = snapshot.child("word1").getValue(String.class);
+                        String word2 = snapshot.child("word2").getValue(String.class);
+
+                        WordTranslation word = new WordTranslation(0, language1, word1, language2, word2);
+                        wordsList.add(word);
+                    }
+
+                    // Shuffle the wordsList to randomize the order
+                    Collections.shuffle(wordsList);
+
+                    // Once data is loaded and shuffled, show the first word
+                    showNextWord();
                 }
 
-                // Shuffle the wordsList to randomize the order
-                Collections.shuffle(wordsList);
-
-                // Once data is loaded and shuffled, show the first word
-                showNextWord();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors or log them
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle errors or log them
+                }
+            });
         });
     }
+
 
 
 
@@ -176,9 +186,12 @@ public class GoldChallengeFragment extends Fragment {
 
     private List<String> generateRandomChoices(int wordIndex) {
         List<String> choices = new ArrayList<>();
+        Set<String> uniqueChoices = new HashSet<>();
 
         // Add correct answer
-        choices.add(wordsList.get(wordIndex).getWord1());
+        String correctAnswer = wordsList.get(wordIndex).getWord1();
+        choices.add(correctAnswer);
+        uniqueChoices.add(correctAnswer);
 
         // Retrieve random choices from the same language (e.g., Portuguese)
         List<String> language1Words = new ArrayList<>();
@@ -190,7 +203,18 @@ public class GoldChallengeFragment extends Fragment {
 
         // Shuffle the list and add remaining choices
         Collections.shuffle(language1Words);
-        choices.addAll(language1Words.subList(0, totalChoices - 1));
+
+        for (String choice : language1Words) {
+            if (uniqueChoices.size() < totalChoices) {
+                // Add unique choices until the desired totalChoices is reached
+                if (!uniqueChoices.contains(choice)) {
+                    choices.add(choice);
+                    uniqueChoices.add(choice);
+                }
+            } else {
+                break; // Break once we have enough unique choices
+            }
+        }
 
         // Shuffle the choices to randomize their order
         Collections.shuffle(choices);

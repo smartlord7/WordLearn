@@ -1,0 +1,95 @@
+<!-- res/layout/fragment_scoreboard.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/bronzeTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bronze Tier"
+        android:textColor="#CD7F32"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/bronzeScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#CD7F32"
+        android:textSize="16sp"
+        android:layout_below="@id/bronzeTitleTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/silverTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Silver Tier"
+        android:textColor="#C0C0C0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/bronzeScoreTextView"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/silverScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#C0C0C0"
+        android:textSize="16sp"
+        android:layout_below="@id/silverTitleTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/goldTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gold Tier"
+        android:textColor="#FFD700"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/silverScoreTextView"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/goldScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#FFD700"
+        android:textSize="16sp"
+        android:layout_below="@id/goldTitleTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/masterTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Master Tier"
+        android:textColor="#800080"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/goldScoreTextView"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/masterScoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#800080"
+        android:textSize="16sp"
+        android:layout_below="@id/masterTitleTextView"
+        android:layout_marginTop="8dp" />
+
+</RelativeLayout>

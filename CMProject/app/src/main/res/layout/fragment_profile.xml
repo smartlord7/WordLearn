@@ -2,33 +2,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212121"
-    android:padding="16dp">
+    android:paddingTop="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:text="Welcome"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textSize="18sp"
-            android:textColor="#CCCCCC"
-            android:layout_marginBottom="16dp" />
+    <TextView
+        android:id="@+id/markersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Markers:"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_below="@id/welcomeTextView"
+        android:layout_marginTop="8dp" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/bronzeMarkersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bronze Tier:\n"
+        android:textColor="#CD7F32"
+        android:textSize="16sp"
+        android:layout_below="@id/markersTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/silverMarkersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Silver Tier:\n"
+        android:textColor="#C0C0C0"
+        android:textSize="16sp"
+        android:layout_below="@id/bronzeMarkersTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/goldMarkersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gold Tier:\n"
+        android:textColor="#FFD700"
+        android:textSize="16sp"
+        android:layout_below="@id/silverMarkersTextView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/masterMarkersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Master Tier:\n"
+        android:textColor="#800080"
+        android:textSize="16sp"
+        android:layout_below="@id/goldMarkersTextView"
+        android:layout_marginTop="8dp" />
+
+
 
 </RelativeLayout>

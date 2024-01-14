@@ -4,10 +4,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cmproject.fragments.BronzeChallengeFragment;
@@ -19,6 +22,7 @@ import com.example.cmproject.fragments.MapFragment;
 import com.example.cmproject.fragments.MasterChallengeFragment;
 import com.example.cmproject.fragments.ProfileFragment;
 import com.example.cmproject.fragments.RegisterFragment;
+import com.example.cmproject.fragments.ScoreboardFragment;
 import com.example.cmproject.fragments.SilverChallengeFragment;
 import com.example.cmproject.fragments.TiersFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +43,7 @@ public class MainMenuActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("WordLearn");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.real_calm_music);
+        mediaPlayer = MediaPlayer.create(this, R.raw.music);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
@@ -49,20 +53,6 @@ public class MainMenuActivity extends AppCompatActivity {
         if (navigationBar != null) {
             navigationBar.setVisibility(View.INVISIBLE);
         }
-        findViewById(R.id.btnRankedPlay).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRankedPlayButtonClick(v);
-            }
-        });
-
-        findViewById(R.id.btnScoreboard).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //onScoreboardButtonClick(v);
-            }
-        });
-
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, new MainMenuFragment())
@@ -132,6 +122,14 @@ public class MainMenuActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void onScoreboardButtonClick (View view){
+        Log.d("ScoreboardFragment", "Button clicked");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new ScoreboardFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
     public void onEnterChallenge(View view, String tier) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(tier.equals("Bronze")) {
@@ -155,6 +153,25 @@ public class MainMenuActivity extends AppCompatActivity {
             mediaPlayer.release();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Get the current fragment
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+
+        // Check if the current fragment is one of the challenge fragments
+        if (currentFragment instanceof BronzeChallengeFragment ||
+                currentFragment instanceof SilverChallengeFragment ||
+                currentFragment instanceof GoldChallengeFragment ||
+                currentFragment instanceof MasterChallengeFragment) {
+
+            // You can show a message or perform any action to inform the user
+            Toast.makeText(this, "Cannot go back during a challenge.", Toast.LENGTH_SHORT).show();
+        } else {
+            // Allow the back button press for other fragments
+            super.onBackPressed();
+        }
     }
 }
 
