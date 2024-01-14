@@ -1,16 +1,18 @@
 package com.example.cmproject.fragments;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cmproject.MainMenuActivity;
 import com.example.cmproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +30,8 @@ public class ProfileFragment extends Fragment {
     private TextView welcomeTextView,emailTextView, markersTextView, bronzeMarkersTextView, silverMarkersTextView,goldMarkersTextView,masterMarkersTextView;
     private DatabaseReference markersReference;
 
+    private Button logoutButton;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +44,11 @@ public class ProfileFragment extends Fragment {
         silverMarkersTextView = view.findViewById(R.id.silverMarkersTextView);
         goldMarkersTextView = view.findViewById(R.id.goldMarkersTextView);
         masterMarkersTextView = view.findViewById(R.id.masterMarkersTextView);
+
+        logoutButton = view.findViewById(R.id.logoutButton);
+
+        // Set click listener for logout button
+        logoutButton.setOnClickListener(v -> logout());
 
         // Initialize Firebase
         markersReference = FirebaseDatabase.getInstance().getReference("markers");
@@ -76,7 +85,6 @@ public class ProfileFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle errors or log them
                 }
             });
         });
@@ -98,7 +106,16 @@ public class ProfileFragment extends Fragment {
             case "Master":
                 masterMarkersTextView.append(String.format(Locale.getDefault(), "\nLAT: %.2f     ||     LONG: %.2f     ||     SCORE: %.2f", latitude, longitude, score));
                 break;
-            // Add more cases for other tiers if needed
         }
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+
+        // Create an Intent to navigate back to MainMenuActivity
+        Intent intent = new Intent(requireActivity(), MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        requireActivity().finish();
     }
 }

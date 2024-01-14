@@ -52,7 +52,6 @@ public class FirebaseUploader {
                 reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                // Handle the exception
             }
         });
     }

@@ -47,7 +47,7 @@ public class MainMenuActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
-        LinearLayout navigationBar = findViewById(R.id.navigationBar); // Use view.findViewById if in a fragment
+        LinearLayout navigationBar = findViewById(R.id.navigationBar);
 
         // To make the navigation bar visible again
         if (navigationBar != null) {
@@ -79,7 +79,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccessful(View view) {
-        LinearLayout navigationBar = findViewById(R.id.navigationBar); // Use view.findViewById if in a fragment
+        LinearLayout navigationBar = findViewById(R.id.navigationBar);
 
         // To make the navigation bar visible again
         if (navigationBar != null) {
@@ -166,7 +166,6 @@ public class MainMenuActivity extends AppCompatActivity {
                 currentFragment instanceof GoldChallengeFragment ||
                 currentFragment instanceof MasterChallengeFragment) {
 
-            // You can show a message or perform any action to inform the user
             Toast.makeText(this, "Cannot go back during a challenge.", Toast.LENGTH_SHORT).show();
         } else {
             // Allow the back button press for other fragments

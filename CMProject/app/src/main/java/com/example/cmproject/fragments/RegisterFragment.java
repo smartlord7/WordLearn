@@ -1,4 +1,5 @@
 package com.example.cmproject.fragments;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cmproject.MainMenuActivity;
@@ -47,7 +47,7 @@ public class RegisterFragment extends Fragment {
         String password = editTextPassword.getText().toString();
         String email = editTextEmail.getText().toString();
 
-        // Check if username, password, and email are not empty
+        // Check if password and email are not empty
         if (!password.isEmpty() && !email.isEmpty()) {
             // Save registration data to Firebase Authentication
             registerUser(email, password);
@@ -64,7 +64,7 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Registration successful, perform any additional actions
+                            // Registration successful
                             showToast("Registration successful");
                         } else {
                             // If registration fails, display a message to the user.

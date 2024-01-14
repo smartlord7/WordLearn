@@ -54,7 +54,6 @@ public class LoginFragment extends Fragment {
 
         Log.d("LoginFragment", "Username: " + username + ", Password: " + password);
 
-        // Check if the entered username and password are correct
         if (!username.isEmpty() && !password.isEmpty()) {
             // Attempt to log in
             loginUser(username, password, view);
@@ -70,7 +69,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Login successful, navigate to the activity with "Ranked Play" and "Scoreboard" buttons
+                            // Login successful
                             ((MainMenuActivity) getActivity()).onLoginSuccessful(view);
                         } else {
                             // If login fails, show an error message

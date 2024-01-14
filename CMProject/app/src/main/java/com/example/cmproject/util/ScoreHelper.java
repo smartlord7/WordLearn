@@ -21,7 +21,6 @@ public class ScoreHelper {
 
     // Function to calculate weighted performance
     private static double calculateWeightedPerformance(double normalizedTime, double normalizedCorrectChoices) {
-        // Adjust the weights based on your preference
         double weightCorrectChoices = 0.7;
         double weightTime = 0.3;
 

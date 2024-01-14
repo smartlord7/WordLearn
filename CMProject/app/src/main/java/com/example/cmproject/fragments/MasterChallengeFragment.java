@@ -5,13 +5,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +21,6 @@ import com.example.cmproject.R;
 import com.example.cmproject.WordTranslation;
 import com.example.cmproject.util.ScoreHelper;
 import com.example.cmproject.views.ChallengeMapViewModel;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,8 +47,8 @@ public class MasterChallengeFragment extends Fragment {
     private TextView timerTextView;
     private long startTime;
 
-    private Handler handler = new Handler(); // Add this line
-    private boolean scoreDisplayed = false; // New variable to track if the score is displayed
+    private Handler handler = new Handler();
+    private boolean scoreDisplayed = false; // Variable to track if the score is displayed
 
 
     // List to store words retrieved from Firebase
@@ -89,7 +86,7 @@ public class MasterChallengeFragment extends Fragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("master");
 
-        // Use Executors for database operation off the main thread
+
         Executor executor = Executors.newSingleThreadExecutor();
 
         executor.execute(() -> {
@@ -117,7 +114,7 @@ public class MasterChallengeFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle errors or log them
+
                 }
             });
         });
@@ -127,7 +124,7 @@ public class MasterChallengeFragment extends Fragment {
 
     private void showNextWord() {
         if (currentWordIndex < totalWords && !wordsList.isEmpty()) {
-            // Display the word in the chosen language (e.g., English)
+            // Display the word in the chosen language
             questionTextView.setText(wordsList.get(currentWordIndex).getWord2());
 
             // Generate random choices (including the correct one)
@@ -178,7 +175,7 @@ public class MasterChallengeFragment extends Fragment {
             long currentTime = System.currentTimeMillis();
             long elapsedTime = currentTime - startTime;
             int seconds = (int) (elapsedTime / 1000);
-            int hundredths = (int) ((elapsedTime / 10) % 100); // Calculate hundredths of a second
+            int hundredths = (int) ((elapsedTime / 10) % 100);
             timerTextView.setText(String.format(Locale.getDefault(), "Timer: %d.%02ds", seconds, hundredths));
         }
     }
@@ -194,7 +191,7 @@ public class MasterChallengeFragment extends Fragment {
         choices.add(correctAnswer);
         uniqueChoices.add(correctAnswer);
 
-        // Retrieve random choices from the same language (e.g., Portuguese)
+        // Retrieve random choices from the same language
         List<String> language1Words = new ArrayList<>();
         for (WordTranslation word : wordsList) {
             if (word.getLanguage1().equals(wordsList.get(wordIndex).getLanguage1())) {
@@ -207,13 +204,13 @@ public class MasterChallengeFragment extends Fragment {
 
         for (String choice : language1Words) {
             if (uniqueChoices.size() < totalChoices) {
-                // Add unique choices until the desired totalChoices is reached
+                // Add unique choices until totalChoices is reached
                 if (!uniqueChoices.contains(choice)) {
                     choices.add(choice);
                     uniqueChoices.add(choice);
                 }
             } else {
-                break; // Break once we have enough unique choices
+                break;
             }
         }
 
@@ -233,7 +230,7 @@ public class MasterChallengeFragment extends Fragment {
         String selectedChoice = selectedButton.getText().toString();
 
         // Get the correct choice text
-        String correctChoice = wordsList.get(currentWordIndex - 1).getWord1(); // Assuming word1 is the correct answer
+        String correctChoice = wordsList.get(currentWordIndex - 1).getWord1();
 
         // Check if the selected choice is correct
         boolean isCorrect = selectedChoice.equals(correctChoice);
@@ -248,7 +245,7 @@ public class MasterChallengeFragment extends Fragment {
             selectedButton.setBackgroundColor(Color.RED);
         }
 
-        // Delay for a short time to show the color change (adjust as needed)
+        // Delay for a short time to show the color change
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -257,7 +254,7 @@ public class MasterChallengeFragment extends Fragment {
                 // Show the next word
                 showNextWord();
             }
-        }, 1000); // 1000 milliseconds (1 second) delay
+        }, 1000);
     }
 
     private void resetButtonColors() {

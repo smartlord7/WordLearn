@@ -1,15 +1,14 @@
 package com.example.cmproject.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import android.util.Log;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class DatabaseHelper {
 
@@ -35,16 +34,13 @@ public class DatabaseHelper {
                 });
     }
 
-    // Example: Check if a user with the given email exists
     public void isEmailExists(String email) {
         mAuth.fetchSignInMethodsForEmail(email)
                 .addOnCompleteListener(task -> {
                     boolean exists = !task.getResult().getSignInMethods().isEmpty();
-                    // Handle the result
                 });
     }
 
-    // Example: Insert words into a specific tier table
     public void insertWord(String tier, String portuguese, String english) {
         String userId = mAuth.getCurrentUser().getUid();
         DatabaseReference tierRef = mDatabase.child("users").child(userId).child(tier.toLowerCase());
@@ -54,7 +50,6 @@ public class DatabaseHelper {
         tierRef.child(wordId).setValue(word);
     }
 
-    // Example: Upload words from a file to a specific tier
     public void uploadWordsFromFile(String tier, InputStream fileInputStream) {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
@@ -76,12 +71,10 @@ public class DatabaseHelper {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the exception
         }
     }
 
 
-    // You may need additional methods based on your use case
 
     // Define the Word class to represent a word
     private static class Word {

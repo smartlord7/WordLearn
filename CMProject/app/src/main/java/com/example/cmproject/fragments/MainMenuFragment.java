@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.cmproject.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainMenuFragment extends Fragment {
 
