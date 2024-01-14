@@ -120,8 +120,22 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void onTierButtonClick(View view,String tier) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, new MapFragment(tier));
+        transaction.addToBackStack("MAP"); // Optional, to add the transaction to the back stack
+        transaction.commit();
+    }
+
+    public void onProfileButtonClick(View view){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new ProfileFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void onEnterChallenge(View view, String tier) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(tier.equals("Bronze")) {
-            transaction.replace(R.id.fragmentContainer, new MapFragment(tier));
+            transaction.replace(R.id.fragmentContainer, new BronzeChallengeFragment());
         }else if(tier.equals("Silver")){
             transaction.replace(R.id.fragmentContainer, new SilverChallengeFragment());
         }
@@ -132,13 +146,6 @@ public class MainMenuActivity extends AppCompatActivity {
         }
         transaction.addToBackStack(null); // Optional, to add the transaction to the back stack
         transaction.commit();
-    }
-
-    public void onProfileButtonClick(View view){
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, new ProfileFragment())
-                .addToBackStack(null)
-                .commit();
     }
 
     protected void onDestroy() {

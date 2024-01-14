@@ -2,12 +2,12 @@ package com.example.cmproject.util;
 
 public class ScoreHelper {
     // Function to dynamically calculate normalized time
-    private static double calculateNormalizedTime(double totalTime) {
+    private static double calculateNormalizedTime(long totalTime) {
         // Normalize time to be between 0 and 1
-        return totalTime > 0 ? 1.0 / (totalTime / 10000) : 1.0;
+        return totalTime > 0 ? 1.0 / ((double) totalTime / 1000) : 1.0;
     }
     // Function to calculate performance value without predefined max time
-    public static double calculatePerformance(double totalTime, int correctChoices, int totalChallenges) {
+    public static double calculatePerformance(long totalTime, int correctChoices, int totalChallenges) {
         // Calculate normalized values for time and correct choices
         double normalizedTime = calculateNormalizedTime(totalTime);
         double normalizedCorrectChoices = (double) correctChoices / totalChallenges;
@@ -26,6 +26,6 @@ public class ScoreHelper {
         double weightTime = 0.3;
 
         // Calculate the performance value using weighted averages
-        return (weightCorrectChoices * normalizedCorrectChoices + weightTime * (1 - normalizedTime)) * 100.0;
+        return (weightCorrectChoices * normalizedCorrectChoices + weightTime * normalizedTime) * 100.0;
     }
 }

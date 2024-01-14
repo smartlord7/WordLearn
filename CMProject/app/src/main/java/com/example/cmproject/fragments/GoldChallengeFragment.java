@@ -13,11 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cmproject.R;
 import com.example.cmproject.WordTranslation;
 import com.example.cmproject.util.ScoreHelper;
+import com.example.cmproject.views.ChallengeMapViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +51,8 @@ public class GoldChallengeFragment extends Fragment {
     // List to store words retrieved from Firebase
     private List<WordTranslation> wordsList;
 
+    private ChallengeMapViewModel sharedViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gold_challenge, container, false);
@@ -63,6 +69,13 @@ public class GoldChallengeFragment extends Fragment {
         showNextWord();
 
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(ChallengeMapViewModel.class);
     }
 
     private void loadWordsFromFirebase() {
@@ -241,8 +254,9 @@ public class GoldChallengeFragment extends Fragment {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Handle the OK button click if needed
-                        // For example, you might want to navigate to another fragment or activity
+                        sharedViewModel.setData(Double.toString(score));
+                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                        fragmentManager.popBackStack();
                     }
                 })
                 .setCancelable(false) // Prevent dismissing by tapping outside the dialog

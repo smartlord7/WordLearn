@@ -5,7 +5,15 @@
     android:background="#212121"
     android:paddingTop="8dp">
 
-    <!-- Toolbar for the navigation bar -->
-
+    <TextView
+        android:id="@+id/welcomeMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to WordLearn Game. In this game, you have to translate English words to Portuguese ones (presented as choices). There are 4 tiers of difficulty: bronze, silver, gold, master, each one increasing in the number of words to translate and word difficulty. The score is based on your correct answers and the time you take to complete the challenge. Players have a map where they can pin a challenge and set a high score there; other players can try and overtake that high score."
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_centerInParent="true"
+        android:padding="16dp"
+        android:lineSpacingMultiplier="1.2" />
 
 </RelativeLayout>
