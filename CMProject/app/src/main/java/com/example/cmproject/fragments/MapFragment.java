@@ -1,49 +1,46 @@
 package com.example.cmproject.fragments;
 
-import static android.content.ContentValues.TAG;
-
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
 import com.example.cmproject.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-
-import java.util.Objects;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
+    private Marker currentMarker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initializeMap(view); // Call the method to initialize the map
-
+        initializeMap(); // Call the method to initialize the map
     }
 
-    private void initializeMap(View view) {
-        FragmentContainerView mapContainer = view.findViewById(R.id.map);
-        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-
-        getChildFragmentManager().beginTransaction().replace(mapContainer.getId(), mapFragment).commit();
+    private void initializeMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
     }
@@ -64,6 +61,59 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         checkLocationPermission();
 
+        // Set maximum and minimum zoom levels
+        googleMap.setMaxZoomPreference(5.0f); // Adjust the value according to your requirement
+        googleMap.setMinZoomPreference(3); // Adjust the value according to your requirement
+
+        // Set an initial marker (for example, the center of the map)
+        LatLng initialLatLng = new LatLng(googleMap.getCameraPosition().target.latitude,
+                googleMap.getCameraPosition().target.longitude);
+        currentMarker = googleMap.addMarker(new MarkerOptions().position(initialLatLng).draggable(true));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(initialLatLng));
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                // Handle map click event
+                // Add a marker at the clicked location
+                Marker marker = googleMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
+
+                // You can also update other UI elements or perform additional actions as needed
+                Toast.makeText(requireContext(), "Marker placed at " + latLng.latitude + ", " + latLng.longitude, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                LatLng markerLatLng = marker.getPosition();
+                double latitude = markerLatLng.latitude;
+                double longitude = markerLatLng.longitude;
+
+                // Now you have the latitude and longitude of the clicked marker
+                System.out.println("Marker clicked at: " + latitude + ", " + longitude);
+
+                // Return false to allow the default behavior (showing the info window)
+                return false;
+            }
+        });
+
+        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+                // Handle marker drag start if needed
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                // Handle marker drag if needed
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                // Handle marker drag end if needed
+            }
+        });
+
         int zoomInt = (int) googleMap.getCameraPosition().zoom;
         final int[] lastZoom = {-1};
         googleMap.setOnCameraMoveListener(() -> {
@@ -72,15 +122,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 lastZoom[0] = zoomInt1;
                 return;
             }
-            Log.d(TAG, "zoom= " + zoomInt1);
-
             // Access views using getView()
             View rootView = getView();
-            if (zoomInt1 < 10) {
+            if (zoomInt1 <= 3) {
                 rootView.findViewById(R.id.grid_small).setVisibility(View.VISIBLE);
                 rootView.findViewById(R.id.grid_medium).setVisibility(View.GONE);
                 rootView.findViewById(R.id.grid_large).setVisibility(View.GONE);
-            } else if (zoomInt1 < 11) {
+            } else if (zoomInt1 <= 4) {
                 rootView.findViewById(R.id.grid_small).setVisibility(View.GONE);
                 rootView.findViewById(R.id.grid_medium).setVisibility(View.VISIBLE);
                 rootView.findViewById(R.id.grid_large).setVisibility(View.GONE);

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.cmproject.fragments.ChallengeFragment;
 import com.example.cmproject.fragments.HomeFragment;
 import com.example.cmproject.fragments.LoginFragment;
 import com.example.cmproject.fragments.MainMenuFragment;
@@ -112,6 +113,5 @@ public class MainMenuActivity extends AppCompatActivity {
         transaction.addToBackStack(null); // Optional, to add the transaction to the back stack
         transaction.commit();
     }
-
 }
 

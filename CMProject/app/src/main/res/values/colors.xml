@@ -8,5 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="golden">#FFD700</color>
-    <color name="gridLine">#DC0505</color>
+    <color name="gridLine">#563C3434</color>
+    <color name="default_cell_color">#FF4081</color>
+    <color name="selected_cell_color">#FFFFFF</color>
+    <color name="defaultCellColor">#001B1B1B</color>
 </resources>
