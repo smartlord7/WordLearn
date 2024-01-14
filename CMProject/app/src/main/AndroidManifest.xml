@@ -67,7 +67,7 @@
         </activity>
 
         <activity
-            android:name=".TierDetailsActivity"
+            android:name=".ZoomableTileGridView"
             android:exported="false"> <!-- Set exported to false for other activities -->
         </activity>
 

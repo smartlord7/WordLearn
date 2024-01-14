@@ -9,12 +9,12 @@
         android:id="@+id/textViewLoginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login to Language Game"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:text="Login to WordWorld"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextLoginUsername"
@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewLoginTitle"
         android:layout_marginTop="16dp"
-        android:hint="Username"
         android:background="#FFFFFF"
-        android:padding="10dp"/>
+        android:hint="Email"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/editTextLoginPassword"

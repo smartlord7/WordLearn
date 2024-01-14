@@ -28,7 +28,7 @@ public class TiersActivity extends AppCompatActivity {
         }
 
         // Pass the selected tier to the next activity (you can customize this part)
-        Intent intent = new Intent(this, TierDetailsActivity.class);
+        Intent intent = new Intent(this, ZoomableTileGridView.class);
         intent.putExtra("selectedTier", tier);
         startActivity(intent);
     }

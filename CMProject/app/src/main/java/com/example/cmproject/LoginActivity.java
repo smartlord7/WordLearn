@@ -1,25 +1,33 @@
 package com.example.cmproject;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextUsername, editTextPassword;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.fragment_login);
 
         editTextUsername = findViewById(R.id.editTextLoginUsername);
         editTextPassword = findViewById(R.id.editTextLoginPassword);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void onLoginButtonClick(View view) {
@@ -29,32 +37,29 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("LoginActivity", "Username: " + username + ", Password: " + password);
 
         // Check if the entered username and password are correct
-        if (isValidCredentials(username, password)) {
-            // If correct, navigate to the activity with "Ranked Play" and "Scoreboard" buttons
-            Intent intent = new Intent(this, LoggedInActivity.class);
-            startActivity(intent);
-            finish(); // Finish the LoginActivity to prevent going back
-        } else {
-            // If incorrect, show an error message
-            showToast("Invalid username or password");
-        }
+        loginUser(username, password);
     }
 
-    private boolean isValidCredentials(String username, String password) {
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-
-        // Check if the username and password combination exists in the database
-        boolean isValid = dbHelper.checkUserCredentials(username, password);
-
-        Log.d("LoginActivity", "IsValid: " + isValid);
-
-        // Close the database
-        dbHelper.closeDatabase();
-
-        return isValid;
+    private void loginUser(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Login successful, navigate to the activity with "Ranked Play" and "Scoreboard" buttons
+                            Intent intent = new Intent(LoginActivity.this, LoggedInActivity.class);
+                            startActivity(intent);
+                            finish(); // Finish the LoginActivity to prevent going back
+                        } else {
+                            // If login fails, show an error message
+                            showToast("Invalid username or password");
+                        }
+                    }
+                });
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
+

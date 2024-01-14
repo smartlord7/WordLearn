@@ -1,42 +1,17 @@
 <!-- res/layout/activity_main_menu.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#212121">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Language Game"
-        android:textSize="24sp"
-        android:textColor="#FFFFFF"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/MainMenuButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvTitle"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="onLoginButtonClick"
-        android:text="Login" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        style="@style/MainMenuButton"
+    <!-- Add FrameLayout container for fragments -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="onRegisterButtonClick"
-        android:text="Register" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
-
