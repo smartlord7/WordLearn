@@ -2,6 +2,7 @@ package com.example.cmproject;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,12 +10,16 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.cmproject.fragments.ChallengeFragment;
+import com.example.cmproject.fragments.BronzeChallengeFragment;
+import com.example.cmproject.fragments.GoldChallengeFragment;
 import com.example.cmproject.fragments.HomeFragment;
 import com.example.cmproject.fragments.LoginFragment;
 import com.example.cmproject.fragments.MainMenuFragment;
 import com.example.cmproject.fragments.MapFragment;
+import com.example.cmproject.fragments.MasterChallengeFragment;
+import com.example.cmproject.fragments.ProfileFragment;
 import com.example.cmproject.fragments.RegisterFragment;
+import com.example.cmproject.fragments.SilverChallengeFragment;
 import com.example.cmproject.fragments.TiersFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +29,9 @@ public class MainMenuActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
 
+    private MediaPlayer mediaPlayer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,9 @@ public class MainMenuActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("WordLearn");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.real_calm_music);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
         LinearLayout navigationBar = findViewById(R.id.navigationBar); // Use view.findViewById if in a fragment
 
@@ -107,11 +118,36 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-    public void onTierButtonClick(View view) {
+    public void onTierButtonClick(View view,String tier) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, new MapFragment());
+        if(tier.equals("Bronze")) {
+            transaction.replace(R.id.fragmentContainer, new MapFragment(tier));
+        }else if(tier.equals("Silver")){
+            transaction.replace(R.id.fragmentContainer, new SilverChallengeFragment());
+        }
+        else if(tier.equals("Gold")){
+            transaction.replace(R.id.fragmentContainer, new GoldChallengeFragment());
+        } else if(tier.equals("Master")){
+            transaction.replace(R.id.fragmentContainer, new MasterChallengeFragment());
+        }
         transaction.addToBackStack(null); // Optional, to add the transaction to the back stack
         transaction.commit();
+    }
+
+    public void onProfileButtonClick(View view){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new ProfileFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    protected void onDestroy() {
+        // Stop and release MediaPlayer when the activity is destroyed
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        super.onDestroy();
     }
 }
 

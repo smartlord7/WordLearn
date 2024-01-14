@@ -5,12 +5,23 @@
     android:padding="16dp"
     android:background="#212121">
 
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="178dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/icon_content_description"
+        android:src="@drawable/word_learn_icon" />
+
     <TextView
         android:id="@+id/textViewLoginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/iconImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
         android:text="Login to Word Learn"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -45,6 +56,6 @@
         android:layout_below="@id/editTextLoginPassword"
         android:layout_marginTop="24dp"
         android:onClick="onLoginButtonClick"
-    style="@style/MainMenuButton"/>
+        style="@style/MainMenuButton"/>
 
 </RelativeLayout>

@@ -80,6 +80,7 @@ public class DatabaseHelper {
         }
     }
 
+
     // You may need additional methods based on your use case
 
     // Define the Word class to represent a word

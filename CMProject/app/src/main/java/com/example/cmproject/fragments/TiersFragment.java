@@ -55,6 +55,6 @@ public class TiersFragment extends Fragment {
     }
 
     private void onTierButtonClick(View view, String tier) {
-        ((MainMenuActivity) getActivity()).onTierButtonClick(view);
+        ((MainMenuActivity) getActivity()).onTierButtonClick(view,tier);
     }
 }

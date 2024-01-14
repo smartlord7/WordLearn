@@ -1,0 +1,57 @@
+<!-- res/layout/fragment_silver_challenge.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer: 0s"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnChoice1"
+        style="@style/ChoiceButton"
+        android:layout_below="@id/questionTextView"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnChoice2"
+        style="@style/ChoiceButton"
+        android:layout_below="@id/btnChoice1"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnChoice3"
+        style="@style/ChoiceButton"
+        android:layout_below="@id/btnChoice2"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnChoice4"
+        style="@style/ChoiceButton"
+        android:layout_below="@id/btnChoice3"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnChoice5"
+        style="@style/ChoiceButton"
+        android:layout_below="@id/btnChoice4"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>

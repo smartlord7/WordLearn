@@ -41,6 +41,18 @@
             <item name="android:background">#800080</item> <!-- Purple color for Master -->
         </style>
 
+    <!-- res/values/styles.xml -->
+    <style name="ChoiceButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+
 
 
 

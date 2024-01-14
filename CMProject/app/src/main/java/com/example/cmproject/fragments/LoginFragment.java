@@ -1,6 +1,5 @@
 package com.example.cmproject.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cmproject.MainMenuActivity;
-import com.example.cmproject.fragments.HomeFragment;
 import com.example.cmproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,7 +55,13 @@ public class LoginFragment extends Fragment {
         Log.d("LoginFragment", "Username: " + username + ", Password: " + password);
 
         // Check if the entered username and password are correct
-        loginUser(username, password,view);
+        if (!username.isEmpty() && !password.isEmpty()) {
+            // Attempt to log in
+            loginUser(username, password, view);
+        } else {
+            // Show an error message if either username or password is empty
+            showToast("Both username and password are required");
+        }
     }
 
     private void loginUser(String email, String password, View view) {
